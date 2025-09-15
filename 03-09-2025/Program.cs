@@ -7,7 +7,9 @@ class Fraction
 
     public Fraction(int numerator, int denominator)
     {
-        if (denominator == 0) throw new DivideByZeroException("Nenner darf nicht 0 sein.");
+        if (denominator == 0)
+            throw new DivideByZeroException("Nenner darf nicht 0 sein.");
+        
         Numerator = numerator;
         Denominator = denominator;
         Simplify();
@@ -16,33 +18,50 @@ class Fraction
     // Parsen von Eingaben im Format "a b/c" oder nur "a" oder nur "b/c"
     public static Fraction Parse(string input)
     {
-        input = input.Trim();
-        int whole = 0;
-        int numerator = 0;
-        int denominator = 1;
-
-        if (input.Contains(" "))
+        try
         {
-            var parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            whole = int.Parse(parts[0]);
+            input = input.Trim();
+            int whole = 0;
+            int numerator = 0;
+            int denominator = 1;
 
-            var frac = parts[1].Split('/');
-            numerator = int.Parse(frac[0]);
-            denominator = int.Parse(frac[1]);
-        }
-        else if (input.Contains("/"))
-        {
-            var frac = input.Split('/');
-            numerator = int.Parse(frac[0]);
-            denominator = int.Parse(frac[1]);
-        }
-        else
-        {
-            whole = int.Parse(input);
-        }
+            if (input.Contains(" "))
+            {
+                var parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length != 2) throw new FormatException("Ungültiges Bruchformat.");
 
-        int totalNumerator = whole * denominator + numerator;
-        return new Fraction(totalNumerator, denominator);
+                whole = int.Parse(parts[0]);
+
+                var frac = parts[1].Split('/');
+                if (frac.Length != 2) throw new FormatException("Ungültiges Bruchformat.");
+
+                numerator = int.Parse(frac[0]);
+                denominator = int.Parse(frac[1]);
+            }
+            else if (input.Contains("/"))
+            {
+                var frac = input.Split('/');
+                if (frac.Length != 2) throw new FormatException("Ungültiges Bruchformat.");
+
+                numerator = int.Parse(frac[0]);
+                denominator = int.Parse(frac[1]);
+            }
+            else
+            {
+                whole = int.Parse(input);
+            }
+
+            int totalNumerator = whole * denominator + numerator;
+            return new Fraction(totalNumerator, denominator);
+        }
+        catch (FormatException)
+        {
+            throw new FormatException("Eingabe konnte nicht in einen Bruch umgewandelt werden. Bitte Format überprüfen.");
+        }
+        catch (OverflowException)
+        {
+            throw new OverflowException("Eingegebene Zahl ist zu groß oder zu klein.");
+        }
     }
 
     public static Fraction operator +(Fraction a, Fraction b)
@@ -92,16 +111,35 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Bitte ersten Bruch eingeben (Format z.B. '1 1/2' oder '3/4' oder '2'):");
-        string input1 = Console.ReadLine();
-        Fraction f1 = Fraction.Parse(input1);
+        try
+        {
+            Console.WriteLine("Bitte ersten Bruch eingeben (Format z.B. '1 1/2' oder '3/4' oder '2'):");
+            string input1 = Console.ReadLine();
+            Fraction f1 = Fraction.Parse(input1);
 
-        Console.WriteLine("Bitte zweiten Bruch eingeben:");
-        string input2 = Console.ReadLine();
-        Fraction f2 = Fraction.Parse(input2);
+            Console.WriteLine("Bitte zweiten Bruch eingeben:");
+            string input2 = Console.ReadLine();
+            Fraction f2 = Fraction.Parse(input2);
 
-        Fraction result = f1 + f2;
+            Fraction result = f1 + f2;
 
-        Console.WriteLine($"Ergebnis: {result}");
+            Console.WriteLine($"Ergebnis: {result}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine($"Fehler: {ex.Message}");
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine($"Formatfehler: {ex.Message}");
+        }
+        catch (OverflowException ex)
+        {
+            Console.WriteLine($"Zahlenfehler: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ein unbekannter Fehler ist aufgetreten: {ex.Message}");
+        }
     }
 }

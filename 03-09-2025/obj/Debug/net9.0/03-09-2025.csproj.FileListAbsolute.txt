@@ -12,3 +12,4 @@ C:\Users\marce\OneDrive\Desktop\Schule 3AHWII\SWP_GRAF\SWP_X_\03-09-2025\obj\Deb
 C:\Users\marce\OneDrive\Desktop\Schule 3AHWII\SWP_GRAF\SWP_X_\03-09-2025\obj\Debug\net9.0\03-09-2025.pdb
 C:\Users\marce\OneDrive\Desktop\Schule 3AHWII\SWP_GRAF\SWP_X_\03-09-2025\obj\Debug\net9.0\03-09-2025.genruntimeconfig.cache
 C:\Users\marce\OneDrive\Desktop\Schule 3AHWII\SWP_GRAF\SWP_X_\03-09-2025\obj\Debug\net9.0\ref\03-09-2025.dll
+C:\Users\marce\OneDrive\Desktop\Schule 3AHWII\SWP_GRAF\SWP_X_\03-09-2025\obj\Debug\net9.0\03-09-2025.sourcelink.json
