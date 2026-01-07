@@ -8,7 +8,6 @@ class Person
     // Konstruktor: Wird beim Erstellen eines Objekts aufgerufen
     public Person(string name)
     {
-        // 'this' verweist auf das aktuelle Objekt
         this.name = name;
     }
 

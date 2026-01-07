@@ -1,0 +1,35 @@
+- CSV steht für Comma-Separated Values
+--> Ist ein einfaches Textformat, um tabellarische Daten zu speichern
+--> Jede Zeile hat einen Datensatz, die Werte sind durch Trennzeichen getrennt
+
+- 2 Separators
+--> Komma (,)
+--> Semikolon (;)
+
+- Delimiter
+--> Allgemeiner Begriff für das Trennzeichen in einer CSV-Datei (oft ähnlich wie Separator)
+--> Bestimmt wo Feld endet und beginnt
+
+- Quotation
+--> Werte können in Anführungszeichen stehen
+--> Ist wichtig wenn der Text selbst ein Trennzeichen hat
+
+- Dialekt
+--> Ein CSV-Dialekt beschreibt die genaue Variante
+---> Welches Trennzeichen
+---> Welche Anführungszeichen
+---> Zeilenende 
+---> Encoding
+--> Unterschiedliche Programme verwenden unterschiedliche Dialekte
+
+- In- / Output bei C#
+--> Input
+---> string text = Console.ReadLine();
+--> Output
+---> Console.WriteLine(text);
+
+- Encoding
+--> Zeichenkodierung
+--> Bestimmt, wie Zeichen gespeichert werden
+--> Wichtig für Umlaute und Sonderzeichen
+--> UTF-8 ist der empfohlene Standart für CSV-Datein
